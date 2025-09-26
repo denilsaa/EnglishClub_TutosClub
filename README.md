@@ -28,12 +28,15 @@ Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
 ## En Mac/Linux:
    - **python3 -m venv venv**
    - **source venv/bin/activate**
+
 3. **Instalar las dependencias**:
     Una vez dentro del entorno virtual, instala todas las dependencias necesarias usando el archivo requirements.txt:
      - **pip install -r requirements.txt**
+
 4. **Aplicar las migraciones**:
     Ejecuta el siguiente comando para aplicar las migraciones a la base de datos y crear las tablas necesarias.
      - **python manage.py migrate**
+     
 5. **Iniciar el servidor de desarrollo**:
     Finalmente, ejecuta el servidor de desarrollo para ver la aplicación en acción.
      - **python manage.py runserver**
