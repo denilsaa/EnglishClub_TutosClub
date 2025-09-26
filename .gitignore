@@ -1,2 +1,5 @@
 # Ignorar la carpeta del entorno virtual
 venv/
+# Ignorar archivos de cache de Python
+__pycache__/
+*.pyc
