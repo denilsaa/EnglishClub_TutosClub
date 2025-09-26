@@ -1,9 +1,2 @@
 # Ignorar la carpeta del entorno virtual
 venv/
-touch apps/asistencia/static/.gitkeep
-touch apps/cursos/static/.gitkeep
-touch apps/estudiantes/static/.gitkeep
-touch apps/notas/static/.gitkeep
-touch apps/publicaciones/static/.gitkeep
-touch apps/vark/static/.gitkeep
-touch apps/publico/static/.gitkeep
