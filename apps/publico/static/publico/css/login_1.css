@@ -1,0 +1,168 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo imagen */
+body {
+  background: url("../img/Fondo2.png") center/cover no-repeat;
+}
+
+/* Overlay empañado tipo "tomo" */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(12px) brightness(0.7);
+  background: rgba(20, 30, 60, 0.3); /* Azul oscuro translúcido */
+  z-index: 0;
+}
+
+/* Panel derecho con login alineado hacia la derecha pero con margen */
+.right-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end; /* empuja al login hacia la derecha */
+  align-items: center;       /* centro vertical */
+  padding-right: 15%;         /* margen desde el borde derecho */
+}
+
+/* Caja login con fondo blanco y bordes redondeados */
+.login-box {
+  width: 400px;             
+  background: white;
+  border-radius: 15px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* Bienvenido */
+.welcome {
+  color: #0d47a1;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-bottom: 3px solid #d4af37;
+  display: inline-block;
+  padding-bottom: 8px;
+  animation: fadeSlide 1.5s ease forwards;
+  position: relative;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  from { left: -100%; }
+  to { left: 100%; }
+}
+
+/* Texto instrucciones en color oscuro */
+.instructions {
+  margin-bottom: 2rem;
+  color: #333; /* color oscuro para contraste con fondo blanco */
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Inputs */
+.input-box {
+  margin-bottom: 1rem;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 0.9rem;
+  margin: 0.5rem 0;
+  border: 2px solid #1976d2;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+  background: rgba(255,255,255,0.9); /* más visible sobre blanco */
+  color: #0d47a1; /* texto oscuro */
+}
+
+.input-box input::placeholder {
+  color: #555; /* placeholder oscuro */
+}
+
+.input-box input:focus {
+  border-color: #d4af37;
+}
+
+/* Botón */
+.btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  border: none;
+  border-radius: 8px;
+  color: #0d47a1;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #ffd700, #d4af37);
+  transform: translateY(-2px);
+}
+
+/* Fade escalonado para inputs y botón */
+.fade-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s forwards;
+}
+
+.fade-item:nth-child(1) { animation-delay: 1.5s; }
+.fade-item:nth-child(2) { animation-delay: 1.8s; }
+.fade-item:nth-child(3) { animation-delay: 2.1s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
