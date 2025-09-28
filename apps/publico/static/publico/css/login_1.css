@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +24,7 @@ body {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(12px) brightness(0.7);
-  background: rgba(20, 30, 60, 0.3); /* Azul oscuro translúcido */
+  background: rgba(20, 30, 60, 0.3);
   z-index: 0;
 }
 
@@ -36,9 +35,9 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: flex-end; /* empuja al login hacia la derecha */
-  align-items: center;       /* centro vertical */
-  padding-right: 15%;         /* margen desde el borde derecho */
+  justify-content: flex-end; 
+  align-items: center;
+  padding-right: 15%;
 }
 
 /* Caja login con fondo blanco y bordes redondeados */
@@ -89,7 +88,7 @@ body {
 /* Texto instrucciones en color oscuro */
 .instructions {
   margin-bottom: 2rem;
-  color: #333; /* color oscuro para contraste con fondo blanco */
+  color: #333; 
   font-size: 1rem;
   line-height: 1.5;
   opacity: 0;
@@ -116,12 +115,12 @@ body {
   font-size: 1rem;
   outline: none;
   transition: 0.3s;
-  background: rgba(255,255,255,0.9); /* más visible sobre blanco */
-  color: #0d47a1; /* texto oscuro */
+  background: rgba(255,255,255,0.9);
+  color: #0d47a1;
 }
 
 .input-box input::placeholder {
-  color: #555; /* placeholder oscuro */
+  color: #555;
 }
 
 .input-box input:focus {
