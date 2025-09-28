@@ -129,18 +129,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'apps' / 'publico' / 'static',      # Para la aplicación 'publico'
-    BASE_DIR / 'apps' / 'estudiantes' / 'static',  # Para la aplicación 'estudiantes'
-    BASE_DIR / 'apps' / 'asistencia' / 'static',   # Para la aplicación 'asistencia'
-    BASE_DIR / 'apps' / 'cursos' / 'static',       # Para la aplicación 'cursos'
-    BASE_DIR / 'apps' / 'notas' / 'static',        # Para la aplicación 'notas'
-    BASE_DIR / 'apps' / 'publicaciones' / 'static',# Para la aplicación 'publicaciones'
-    BASE_DIR / 'apps' / 'vark' / 'static',         # Para la aplicación 'vark'
-    BASE_DIR / 'apps' / 'usuarios' / 'static',     # Para la aplicación 'usuarios'
+    BASE_DIR / 'apps' / 'publico' / 'static',
+    BASE_DIR / 'apps' / 'estudiantes' / 'static',
+    BASE_DIR / 'apps' / 'asistencia' / 'static',
+    BASE_DIR / 'apps' / 'cursos' / 'static',
+    BASE_DIR / 'apps' / 'notas' / 'static',
+    BASE_DIR / 'apps' / 'publicaciones' / 'static',
+    BASE_DIR / 'apps' / 'vark' / 'static',
+    BASE_DIR / 'apps' / 'usuarios' / 'static',
 ]
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
