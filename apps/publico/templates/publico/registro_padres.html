@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro de Padre de Familia</title>
   <style>
-    /* Reset básico */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -14,7 +13,7 @@
 
     body { 
   font-family: Arial, sans-serif; 
-  background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* azul oscuro a celeste */
+  background: linear-gradient(135deg, #1E3A8A, #3B82F6);
   display: flex; 
   justify-content: center; 
   align-items: center; 
@@ -94,7 +93,6 @@
       background-color: #D97706; 
     }
 
-    /* Media queries para responsive */
     @media (max-width: 600px) {
       .form-container {
         padding: 20px;
@@ -122,13 +120,7 @@
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
-      <label for="rol">Rol *</label>
-      <select id="rol" name="rol" required>
-        <option value="">Seleccione un rol</option>
-        <option value="directivo">Directivo</option>
-        <option value="secretaria">Secretaria</option>
-        <option value="docente">Docente</option>
-      </select>
+     
 
       <label for="nombres">Nombres *</label>
       <input type="text" id="nombres" name="nombres" required>
@@ -148,8 +140,7 @@
       <label for="fecha_nac">Fecha de Nacimiento *</label>
       <input type="date" id="fecha_nac" name="fecha_nac" required>
 
-      <label for="documentacion">Archivo Documentación *</label>
-      <input type="file" id="documentacion" name="documentacion" required>
+      
 
       <button type="submit" class="btn-submit">Registrar</button>
       <button type="reset" class="btn-cancel">Cancelar</button>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Estudiante</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1E3A8A, #3B82F6); 
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #000000;
+    }
+
+    .form-container {
+      background-color: #FFFFFF;
+      border: 1px solid #9CA3AF;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+      padding: 30px;
+      width: 100%;
+      max-width: 550px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #1E3A8A;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #4B5563;
+    }
+
+    input, select {
+      width: 97%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #9CA3AF;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus {
+      border-color: #3B82F6;
+      outline: none;
+      box-shadow: 0 0 4px #3B82F6;
+    }
+
+    .btn-submit {
+      background-color: #10B981;
+      color: #FFFFFF;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #059669;
+    }
+
+    .btn-cancel {
+      background-color: #F59E0B;
+      color: #FFFFFF;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+      background-color: #D97706;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .subform {
+      background: #F3F4F6;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      border: 1px solid #9CA3AF;
+    }
+
+    .subform h3 {
+      color: #1E3A8A;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    /* Responsividad */
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+
+      input, select {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      .btn-submit, .btn-cancel {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registro de Estudiante</h2>
+    <form>
+      <label for="nombres">Nombres *</label>
+      <input type="text" id="nombres" name="nombres" required>
+
+      <label for="apellidos">Apellidos *</label>
+      <input type="text" id="apellidos" name="apellidos" required>
+
+      <label for="ci">CI *</label>
+      <input type="number" id="ci" name="ci" required>
+
+      <label for="fecha_nac">Fecha de Nacimiento *</label>
+      <input type="date" id="fecha_nac" name="fecha_nac" required>
+
+      <label for="direccion">Dirección *</label>
+      <input type="text" id="direccion" name="direccion" required>
+
+      <label for="telefono">Teléfono *</label>
+      <input type="number" id="telefono" name="telefono" required>
+
+      <label for="centro">Universidad / Colegio *</label>
+      <input type="text" id="centro" name="centro" required>
+
+      <label for="documentacion">Archivo Documentación *</label>
+      <input type="file" id="documentacion" name="documentacion" required>
+
+      <label for="tipo_estudiante">Tipo de Estudiante *</label>
+      <select id="tipo_estudiante" name="tipo_estudiante" required onchange="mostrarCampos()">
+        <option value="">Seleccione tipo</option>
+        <option value="tecnico">Estudiante Técnico</option>
+        <option value="regular">Estudiante Regular</option>
+      </select>
+
+      <!-- Campos Estudiante Técnico -->
+      <div id="form_tecnico" class="hidden">
+        <label for="ocupacion">Ocupación *</label>
+        <input type="text" id="ocupacion" name="ocupacion">
+      </div>
+
+      <!-- Campos Estudiante Regular -->
+      <div id="form_regular" class="hidden">
+        <label for="grupo">Grupo Asignado *</label>
+        <select id="grupo" name="grupo">
+          <option value="">Seleccione un grupo</option>
+          <option value="A">Grupo A</option>
+          <option value="B">Grupo B</option>
+          <option value="C">Grupo C</option>
+        </select>
+
+        <div class="subform">
+          <h3>Registro de Padre / Tutor</h3>
+          <label for="nombre_padre">Nombres *</label>
+          <input type="text" id="nombre_padre" name="nombre_padre">
+
+          <label for="apellido_padre">Apellidos *</label>
+          <input type="text" id="apellido_padre" name="apellido_padre">
+
+          <label for="telefono_padre">Teléfono *</label>
+          <input type="number" id="telefono_padre" name="telefono_padre">
+
+          <label for="direccion_padre">Dirección *</label>
+          <input type="text" id="direccion_padre" name="direccion_padre">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Registrar Estudiante</button>
+      <button type="reset" class="btn-cancel">Cancelar</button>
+    </form>
+  </div>
+
+  <script>
+    function mostrarCampos() {
+      const tipo = document.getElementById("tipo_estudiante").value;
+      document.getElementById("form_tecnico").classList.add("hidden");
+      document.getElementById("form_regular").classList.add("hidden");
+
+      if (tipo === "tecnico") {
+        document.getElementById("form_tecnico").classList.remove("hidden");
+      } else if (tipo === "regular") {
+        document.getElementById("form_regular").classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>
