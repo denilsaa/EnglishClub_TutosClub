@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Padre de Familia</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body { 
+  font-family: Arial, sans-serif; 
+  background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  color: #000; 
+  padding: 15px;
+}
+
+
+    .form-container { 
+      background: #FFF; 
+      border: 1px solid #9CA3AF; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 8px rgba(30,58,138,0.2); 
+      padding: 30px; 
+      width: 100%; 
+      max-width: 500px; 
+    }
+
+    h2 { 
+      text-align: center; 
+      color: #1E3A8A; 
+      margin-bottom: 20px; 
+      font-size: 24px;
+    }
+
+    label { 
+      display: block; 
+      margin-bottom: 6px; 
+      font-weight: bold; 
+      color: #4B5563; 
+      font-size: 14px;
+    }
+
+    input, select { 
+      width: 100%; 
+      padding: 10px; 
+      margin-bottom: 15px; 
+      border-radius: 8px; 
+      border: 1px solid #9CA3AF; 
+      font-size: 14px; 
+    }
+
+    input:focus, select:focus { 
+      border-color: #3B82F6; 
+      outline: none; 
+      box-shadow: 0 0 4px #3B82F6; 
+    }
+
+    .btn-submit, .btn-cancel {
+      font-weight: bold; 
+      border: none; 
+      padding: 12px; 
+      width: 100%; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-size: 16px; 
+      transition: background-color 0.3s;
+    }
+
+    .btn-submit { 
+      background-color: #10B981; 
+      color: #FFF; 
+    }
+
+    .btn-submit:hover { 
+      background-color: #059669; 
+    }
+
+    .btn-cancel { 
+      background-color: #F59E0B; 
+      color: #FFF; 
+      margin-top: 10px; 
+    }
+
+    .btn-cancel:hover { 
+      background-color: #D97706; 
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input, select {
+        padding: 8px;
+        font-size: 13px;
+      }
+
+      .btn-submit, .btn-cancel {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registro de Padre de Familia</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+     
+
+      <label for="nombres">Nombres *</label>
+      <input type="text" id="nombres" name="nombres" required>
+
+      <label for="apellidos">Apellidos *</label>
+      <input type="text" id="apellidos" name="apellidos" required>
+
+      <label for="ci">CI *</label>
+      <input type="number" minlength="8" id="ci" name="ci" required>
+
+      <label for="direccion">Dirección *</label>
+      <input type="text" id="direccion" name="direccion" required>
+
+      <label for="telefono">Teléfono *</label>
+      <input type="number" maxlength="7" id="telefono" name="telefono" required>
+
+      <label for="fecha_nac">Fecha de Nacimiento *</label>
+      <input type="date" id="fecha_nac" name="fecha_nac" required>
+
+      
+
+      <button type="submit" class="btn-submit">Registrar</button>
+      <button type="reset" class="btn-cancel">Cancelar</button>
+    </form>
+  </div>
+</body>
+</html>
