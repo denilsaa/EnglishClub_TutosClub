@@ -13,7 +13,7 @@ body, html {
 
 /* Fondo imagen */
 body {
-  background: url("../img/Fondo2.png") center/cover no-repeat;
+  background: url("../img/Fondo_Azul.png") center/cover no-repeat;
 }
 
 /* Overlay empañado tipo "tomo" */
@@ -28,16 +28,34 @@ body {
   z-index: 0;
 }
 
-/* Panel derecho con login alineado hacia la derecha pero con margen */
 .right-panel {
   position: relative;
   z-index: 1;
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: center; 
   align-items: center;
-  padding-right: 15%;
+  padding-left: 15%; 
+  transform: scale(0.5) translateX(-50%); 
+  opacity: 0;
+  animation: scaleAndSlideLeft 5s ease-in-out forwards;
+}
+
+@keyframes scaleAndSlideLeft {
+  0% {
+    transform: scale(0.5) translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1) translateX(0); /* tamaño máximo en el centro */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateX(calc(-50vw + 50% + 15%)); 
+    /* se desliza suavemente a la derecha y queda en la posición final */
+    opacity: 1;
+  }
 }
 
 /* Caja login con fondo blanco y bordes redondeados */
@@ -164,4 +182,24 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.animated-image {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  top: 50%;
+  left: 10%;
+  
+  /* --- Motion Path --- */
+  offset-path: path("M 0 0 C 200 -100, 400 100, 600 0"); /* curva Bézier */
+  offset-rotate: auto; /* 🔥 hace que el lado 2 siempre apunte hacia adelante */
+  offset-distance: 0%;
+  
+  animation: flyPath 6s ease-in-out infinite;
+}
+/* Animación del movimiento en la ruta */
+@keyframes flyPath {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
 }
