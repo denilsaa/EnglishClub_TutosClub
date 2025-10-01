@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Estudiante Regular</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#1E3A8A,#3B82F6);margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh;color:#000}
+    .form-container{background:#fff;border:1px solid #9CA3AF;border-radius:12px;box-shadow:0 4px 12px rgba(30,58,138,.3);padding:30px;max-width:680px;width:100%}
+    .form-container h2{text-align:center;color:#1E3A8A;margin-bottom:20px}
+    label{display:block;margin-bottom:6px;font-weight:bold;color:#4B5563}
+    input,select{width:97%;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #9CA3AF;font-size:14px}
+    input:focus,select:focus{border-color:#3B82F6;outline:none;box-shadow:0 0 4px #3B82F6}
+    .btn-submit{background:#10B981;color:#fff;font-weight:bold;border:none;padding:12px;width:100%;border-radius:8px;cursor:pointer;font-size:16px;transition:background-color .3s}
+    .btn-submit:hover{background:#059669}
+    .btn-cancel{background:#F59E0B;color:#fff;font-weight:bold;border:none;padding:12px;width:100%;border-radius:8px;cursor:pointer;font-size:16px;margin-top:10px;transition:background-color .3s}
+    .btn-cancel:hover{background:#D97706}
+    .subform{background:#F3F4F6;padding:15px;border-radius:10px;margin-top:10px;border:1px solid #9CA3AF}
+    .subform h3{color:#1E3A8A;font-size:16px;margin-bottom:10px}
+    .messages{margin:10px 0 20px}
+    .messages div{background:#FEF3C7;border:1px solid #F59E0B;color:#92400E;padding:8px 12px;border-radius:8px;margin-bottom:6px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:600px){.grid-2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registro de Estudiante Regular</h2>
+
+    {% if messages %}
+      <div class="messages">
+        {% for m in messages %}<div>{{ m }}</div>{% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'registrar_regular' %}">
+      {% csrf_token %}
+
+      <!-- DATOS DEL PADRE (prefix: padre) -->
+      <div class="subform">
+        <h3>Datos del Padre/Tutor</h3>
+        <div class="grid-2">
+          <div>
+            <label for="padre-nombres">Nombres *</label>
+            <input type="text" id="padre-nombres" name="padre-nombres" required>
+          </div>
+          <div>
+            <label for="padre-apellidos">Apellidos *</label>
+            <input type="text" id="padre-apellidos" name="padre-apellidos" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label for="padre-ci">CI *</label>
+            <input type="text" id="padre-ci" name="padre-ci" required>
+          </div>
+          <div>
+            <label for="padre-fecha_nacimiento">Fecha de Nacimiento *</label>
+            <input type="date" id="padre-fecha_nacimiento" name="padre-fecha_nacimiento" required>
+          </div>
+        </div>
+
+        <label for="padre-telefono">Teléfono</label>
+        <input type="text" id="padre-telefono" name="padre-telefono">
+
+        <label for="padre-direccion">Dirección</label>
+        <input type="text" id="padre-direccion" name="padre-direccion">
+      </div>
+
+      <!-- CUENTA DEL PADRE (prefix: cuenta) -->
+      <div class="subform">
+        <h3>Cuenta de Acceso (Padre/Tutor)</h3>
+        <label for="cuenta-nombre_usuario">Usuario *</label>
+        <input type="text" id="cuenta-nombre_usuario" name="cuenta-nombre_usuario" required>
+
+        <div class="grid-2">
+          <div>
+            <label for="cuenta-contrasena">Contraseña *</label>
+            <input type="password" id="cuenta-contrasena" name="cuenta-contrasena" required>
+          </div>
+          <div>
+            <label for="cuenta-contrasena2">Repite la contraseña *</label>
+            <input type="password" id="cuenta-contrasena2" name="cuenta-contrasena2" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATOS DEL ESTUDIANTE (prefix: est) -->
+      <div class="subform">
+        <h3>Datos del Estudiante</h3>
+        <div class="grid-2">
+          <div>
+            <label for="est-nombres">Nombres *</label>
+            <input type="text" id="est-nombres" name="est-nombres" required>
+          </div>
+          <div>
+            <label for="est-apellidos">Apellidos *</label>
+            <input type="text" id="est-apellidos" name="est-apellidos" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label for="est-ci">CI *</label>
+            <input type="text" id="est-ci" name="est-ci" required>
+          </div>
+          <div>
+            <label for="est-fecha_nacimiento">Fecha de Nacimiento *</label>
+            <input type="date" id="est-fecha_nacimiento" name="est-fecha_nacimiento" required>
+          </div>
+        </div>
+
+        <label for="est-direccion">Dirección</label>
+        <input type="text" id="est-direccion" name="est-direccion">
+
+        <label for="est-telefono">Teléfono</label>
+        <input type="text" id="est-telefono" name="est-telefono">
+
+        <label for="est-colegio_universidad">Colegio *</label>
+        <input type="text" id="est-colegio_universidad" name="est-colegio_universidad" required>
+
+        <label for="est-grupo">Grupo Asignado *</label>
+        <select id="est-grupo" name="est-grupo" required>
+          <option value="">Seleccione un grupo</option>
+          <option value="Sweet">Sweet</option>
+          <option value="Smart">Smart</option>
+          <option value="Teens">Teens</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Registrar Estudiante</button>
+      <a href="{% url 'selector_registro' %}"><button type="button" class="btn-cancel">Cancelar</button></a>
+    </form>
+  </div>
+</body>
+</html>

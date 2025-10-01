@@ -1,8 +1,10 @@
-# apps/usuarios/urls.py
 from django.urls import path
 from .views.login import login_view, logout_view
 from .views.paneles import (
     panel_estudiante, panel_docente, panel_secretaria, panel_padre, panel_directivo
+)
+from .views.registro_estudiantes import (
+    selector_registro, registrar_regular, registrar_tecnico
 )
 
 urlpatterns = [
@@ -15,4 +17,9 @@ urlpatterns = [
     path('panel/secretaria/',  panel_secretaria,  name='panel_secretaria'),
     path('panel/padre/',       panel_padre,       name='panel_padre'),
     path('panel/directivo/',   panel_directivo,   name='panel_directivo'),
+
+    # Registro de estudiantes (solo directivo/secretaria)
+    path('estudiantes/registrar/', selector_registro, name='selector_registro'),
+    path('estudiantes/registrar/regular/', registrar_regular, name='registrar_regular'),
+    path('estudiantes/registrar/tecnico/', registrar_tecnico, name='registrar_tecnico'),
 ]
