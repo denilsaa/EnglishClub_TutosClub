@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-q-q_6&o$9=16iz^gz8dn)x#kquw40khd(aw_8elrc++mxzjem$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# Configuración para manejar archivos subidos
+MEDIA_URL = '/media/'  # URL que se usará para acceder a los archivos
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta donde se almacenarán los archivos en el sistema de archivos
 
 
 # Application definition

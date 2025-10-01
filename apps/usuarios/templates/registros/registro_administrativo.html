@@ -1,0 +1,176 @@
+<!-- templates/registros/registro_administrativo.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Personal Administrativo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* Fondo degradado */
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #000000;
+    }
+
+    .form-container {
+      background-color: #FFFFFF;
+      border: 1px solid #9CA3AF;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+      padding: 30px;
+      width: 100%;
+      max-width: 550px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #1E3A8A;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #4B5563;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #9CA3AF;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus {
+      border-color: #3B82F6;
+      outline: none;
+      box-shadow: 0 0 4px #3B82F6;
+    }
+
+    .btn-submit {
+      background-color: #10B981;
+      color: #FFFFFF;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #059669;
+    }
+
+    .btn-cancel {
+      background-color: #F59E0B;
+      color: #FFFFFF;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+      background-color: #D97706;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registro de Personal Administrativo</h2>
+
+    {% if messages %}
+      {% for m in messages %}
+        <div class="alert">{{ m }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- ROL -->
+      <label for="id_adm-rol">Rol *</label>
+      {{ f_datos.rol }}
+      {% for e in f_datos.rol.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <!-- Cuenta -->
+      <label for="id_cuenta-username">Usuario *</label>
+      {{ f_cuenta.username }}
+      {% for e in f_cuenta.username.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_cuenta-correo">Correo / Salt *</label>
+      {{ f_cuenta.correo }}
+      {% for e in f_cuenta.correo.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_cuenta-password">Contraseña *</label>
+      {{ f_cuenta.password }}
+      {% for e in f_cuenta.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_cuenta-password2">Repetir contraseña *</label>
+      {{ f_cuenta.password2 }}
+      {% for e in f_cuenta.password2.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <!-- Datos personales -->
+      <label for="id_adm-nombres">Nombres *</label>
+      {{ f_datos.nombres }}
+      {% for e in f_datos.nombres.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-apellidos">Apellidos *</label>
+      {{ f_datos.apellidos }}
+      {% for e in f_datos.apellidos.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-ci">CI *</label>
+      {{ f_datos.ci }}
+      {% for e in f_datos.ci.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-direccion">Dirección *</label>
+      {{ f_datos.direccion }}
+      {% for e in f_datos.direccion.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-telefono">Teléfono *</label>
+      {{ f_datos.telefono }}
+      {% for e in f_datos.telefono.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-fecha_nacimiento">Fecha de Nacimiento *</label>
+      {{ f_datos.fecha_nacimiento }}
+      {% for e in f_datos.fecha_nacimiento.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-archivo_documentacion">Archivo Documentación *</label>
+      {{ f_datos.archivo_documentacion }}
+      {% for e in f_datos.archivo_documentacion.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label for="id_adm-activo">Activo</label>
+      {{ f_datos.activo }}
+      {% for e in f_datos.activo.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <!-- errores no-campo -->
+      {% if f_cuenta.non_field_errors %}
+        {% for e in f_cuenta.non_field_errors %}<div class="error">{{ e }}</div>{% endfor %}
+      {% endif %}
+      {% if f_datos.non_field_errors %}
+        {% for e in f_datos.non_field_errors %}<div class="error">{{ e }}</div>{% endfor %}
+      {% endif %}
+
+      <button type="submit" class="btn-submit">Registrar</button>
+      <a href="{{ cancel_url }}"><button type="button" class="btn-cancel">Cancelar</button></a>
+    </form>
+  </div>
+</body>
+</html>
