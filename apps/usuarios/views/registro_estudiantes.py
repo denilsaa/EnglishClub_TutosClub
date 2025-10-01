@@ -40,7 +40,7 @@ def crear_usuario(nombre_usuario: str, contrasena_plana: str) -> Usuario:
     return Usuario.objects.create(
         nombre_usuario=nombre_usuario,
         contrasena=hashpass,
-        correo=salt  # En tu diseño, 'correo' almacena el salt
+        correo=salt  
     )
 
 
