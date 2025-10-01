@@ -16,19 +16,31 @@ from apps.estudiantes.models import Estudiante
 def requiere_directivo_o_secretaria(view):
     """
     Permite el acceso solo si el rol en la sesión es 'directivo' o 'secretaria'.
+    Redirige SIEMPRE al login con namespace si no cumple.
     """
     def _wrap(request, *args, **kwargs):
         rol = request.session.get('rol')
         if rol not in ('directivo', 'secretaria'):
-            messages.error(request, "No tienes permisos para registrar estudiantes.")
-            return redirect('login')
+            messages.error(request, "No tiene permisos para registrar estudiantes.")
+            return redirect('usuarios:login')  # <-- namespace correcto
         return view(request, *args, **kwargs)
     return _wrap
 
 
+def _panel_route_name(rol: str) -> str:
+    """
+    Devuelve el nombre de ruta (con namespace) del panel según el rol.
+    Para este flujo solo usamos directivo/secretaria.
+    """
+    if rol == 'secretaria':
+        return 'usuarios:panel_secretaria'
+    # por defecto, directivo
+    return 'usuarios:panel_directivo'
+
+
 def crear_usuario(nombre_usuario: str, contrasena_plana: str) -> Usuario:
     """
-    Crea Usuario usando tu esquema (sha256(password + salt)) guardando el salt en 'correo'.
+    Crea Usuario usando su esquema (sha256(password + salt)) guardando el salt en 'correo'.
     Lanza ValueError si el nombre_usuario ya existe.
     """
     if Usuario.objects.filter(nombre_usuario=nombre_usuario).exists():
@@ -40,7 +52,7 @@ def crear_usuario(nombre_usuario: str, contrasena_plana: str) -> Usuario:
     return Usuario.objects.create(
         nombre_usuario=nombre_usuario,
         contrasena=hashpass,
-        correo=salt  
+        correo=salt  # aquí guardamos el salt
     )
 
 
@@ -48,7 +60,8 @@ def crear_usuario(nombre_usuario: str, contrasena_plana: str) -> Usuario:
 
 @requiere_directivo_o_secretaria
 def registrar_regular(request):
-    cancel_url = reverse('panel_secretaria') if request.session.get('rol') == 'secretaria' else reverse('panel_directivo')
+    rol = request.session.get('rol')
+    cancel_url = reverse(_panel_route_name(rol))  # <-- namespace correcto
 
     if request.method == 'POST':
         padre_form  = PadreForm(request.POST, prefix='padre')
@@ -89,7 +102,7 @@ def registrar_regular(request):
             )
 
             messages.success(request, "Estudiante REGULAR registrado. Usuario y contraseña asignados al PADRE.")
-            return redirect('panel_secretaria' if request.session.get('rol') == 'secretaria' else 'panel_directivo')
+            return redirect(_panel_route_name(rol))  # <-- namespace correcto
 
     else:
         padre_form  = PadreForm(prefix='padre')
@@ -104,9 +117,12 @@ def registrar_regular(request):
     })
 
 
+# ---------------- Registro TÉCNICO (mayor; credenciales para el Estudiante) ----------------
+
 @requiere_directivo_o_secretaria
 def registrar_tecnico(request):
-    cancel_url = reverse('panel_secretaria') if request.session.get('rol') == 'secretaria' else reverse('panel_directivo')
+    rol = request.session.get('rol')
+    cancel_url = reverse(_panel_route_name(rol))  # <-- namespace correcto
 
     if request.method == 'POST':
         est_form    = EstudianteTecnicoForm(request.POST, prefix='est')
@@ -142,7 +158,7 @@ def registrar_tecnico(request):
             )
 
             messages.success(request, "Estudiante TÉCNICO registrado. Usuario y contraseña asignados al ESTUDIANTE.")
-            return redirect('panel_secretaria' if request.session.get('rol') == 'secretaria' else 'panel_directivo')
+            return redirect(_panel_route_name(rol))  # <-- namespace correcto
 
     else:
         est_form    = EstudianteTecnicoForm(prefix='est')

@@ -15,11 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # configuraciones/urls.py
-from django.shortcuts import redirect
+# configuraciones/urls.py
+from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 from django.conf import settings
 from django.conf.urls.static import static
+
 urlpatterns = [
-    path('usuarios/', include('apps.usuarios.urls')),  # Incluir las URLs de la app usuarios
-    path('', lambda r: redirect('usuarios:login')),  # Añadir el namespace 'usuarios:login'
+    path('', lambda r: redirect('usuarios:login')),  # home -> login con namespace
+    path('admin/', admin.site.urls),
+    path('usuarios/', include('apps.usuarios.urls')),  # usa app_name='usuarios'
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -33,7 +33,8 @@
       </div>
     {% endif %}
 
-    <form method="POST" action="{% url 'registrar_tecnico' %}">
+    <!-- IMPORTANTE: namespace en el action -->
+    <form method="POST" action="{% url 'usuarios:registrar_tecnico' %}">
       {% csrf_token %}
 
       <!-- DATOS DEL ESTUDIANTE (prefix: est) -->
@@ -91,8 +92,9 @@
           </div>
         </div>
       </div>
-        <button type="submit" class="btn-submit">Registrar Estudiante</button>
-        <a href="{{ cancel_url }}"><button type="button" class="btn-cancel">Cancelar</button></a>
+
+      <button type="submit" class="btn-submit">Registrar Estudiante</button>
+      <a href="{{ cancel_url }}"><button type="button" class="btn-cancel">Cancelar</button></a>
     </form>
   </div>
 </body>
