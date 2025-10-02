@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===========================
         Validaciones
    =========================== */
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
 
   // Función para mostrar error
   function showError(input, message) {
@@ -102,74 +102,74 @@ document.addEventListener("DOMContentLoaded", () => {
     return romanMap[num] || num;
   }
 
-// Validación nombres (padre o estudiante)
-function validateName(input, maxWords) {
-  const val = input.value;
+  // Validación nombres (padre o estudiante)
+  function validateName(input, maxWords) {
+    const val = input.value;
   
-  // Revisar espacios al inicio o final
-  if (/^\s|\s$/.test(val)) {
-    showError(input, "No se permiten espacios al inicio ni al final");
-    return false;
-  }
-
-  const words = val.split(/\s+/); // separar palabras por espacio
-
-  if (words.length > maxWords) {
-    showError(input, `Solo se permiten máximo ${maxWords} palabras`);
-    return false;
-  }
-
-  for (let w of words) {
-    if (w.length < 3) {
-      showError(input, "Cada palabra debe tener al menos 3 letras");
+    // Revisar espacios al inicio o final
+    if (/^\s|\s$/.test(val)) {
+      showError(input, "No se permiten espacios al inicio ni al final");
       return false;
     }
-    if (/[^A-Za-zÀ-ÿ]/.test(w)) {
-      // revisa si hay números del 1-10
-      if (/^[1-9]$|10/.test(w)) {
-        input.value = input.value.replace(w, numberToRoman(parseInt(w)));
-      } else {
+
+    const words = val.split(/\s+/); // separar palabras por espacio
+
+    if (words.length > maxWords) {
+      showError(input, `Solo se permiten máximo ${maxWords} palabras`);
+      return false;
+    }
+
+    for (let w of words) {
+      if (w.length < 3) {
+        showError(input, "Cada palabra debe tener al menos 3 letras");
+        return false;
+      }
+      if (/[^A-Za-zÀ-ÿ]/.test(w)) {
+        // revisa si hay números del 1-10
+        if (/^[1-9]$|10/.test(w)) {
+          input.value = input.value.replace(w, numberToRoman(parseInt(w)));
+        } else {
+          showError(input, "No se permiten números ni caracteres especiales");
+          return false;
+        }
+      }
+    }
+
+    clearError(input);
+    return true;
+  }
+
+  // Validación apellido (padre o estudiante)
+  function validateLastName(input, maxWords = 2) {
+    const val = input.value;
+
+    // Revisar espacios al inicio o final
+    if (/^\s|\s$/.test(val)) {
+      showError(input, "No se permiten espacios al inicio ni al final");
+      return false;
+    }
+
+    const words = val.split(/\s+/);
+
+    if (words.length > maxWords) {
+      showError(input, `Solo se permiten máximo ${maxWords} palabras`);
+      return false;
+    }
+
+    for (let w of words) {
+      if (w.length < 3) {
+        showError(input, "Cada palabra debe tener al menos 3 letras");
+        return false;
+      }
+      if (/[^A-Za-zÀ-ÿ]/.test(w)) {
         showError(input, "No se permiten números ni caracteres especiales");
         return false;
       }
     }
+
+    clearError(input);
+    return true;
   }
-
-  clearError(input);
-  return true;
-}
-
-// Validación apellido (padre o estudiante)
-function validateLastName(input, maxWords = 2) {
-  const val = input.value;
-
-  // Revisar espacios al inicio o final
-  if (/^\s|\s$/.test(val)) {
-    showError(input, "No se permiten espacios al inicio ni al final");
-    return false;
-  }
-
-  const words = val.split(/\s+/);
-
-  if (words.length > maxWords) {
-    showError(input, `Solo se permiten máximo ${maxWords} palabras`);
-    return false;
-  }
-
-  for (let w of words) {
-    if (w.length < 3) {
-      showError(input, "Cada palabra debe tener al menos 3 letras");
-      return false;
-    }
-    if (/[^A-Za-zÀ-ÿ]/.test(w)) {
-      showError(input, "No se permiten números ni caracteres especiales");
-      return false;
-    }
-  }
-
-  clearError(input);
-  return true;
-}
 
   // Validación CI
   function validateCI(input) {
@@ -241,40 +241,40 @@ function validateLastName(input, maxWords = 2) {
     return true;
   }
 
-// Validación fecha nacimiento en tiempo real
-function validateBirthDate(input, type) {
-  const today = new Date();
-  const val = new Date(input.value);
+  // Validación fecha nacimiento en tiempo real
+  function validateBirthDate(input, type) {
+    const today = new Date();
+    const val = new Date(input.value);
 
-  if (isNaN(val.getTime())) {
-    showError(input, "❌ Fecha inválida");
-    return false;
+    if (isNaN(val.getTime())) {
+      showError(input, "❌ Fecha inválida");
+      return false;
+    }
+
+    let minDate, maxDate;
+
+    if (type === "padre") {
+      maxDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
+      minDate = new Date(today.getFullYear() - 90, today.getMonth(), today.getDate());
+    } else if (type === "estudiante") {
+      maxDate = new Date(today.getFullYear() - 4, today.getMonth(), today.getDate());
+      minDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
+    } else {
+      showError(input, "❌ Tipo desconocido");
+      return false;
+    }
+
+    if (val < minDate || val > maxDate) {
+      showError(
+        input,
+        `❌ La fecha debe estar entre ${minDate.toLocaleDateString()} y ${maxDate.toLocaleDateString()}`
+      );
+      return false;
+    }
+
+    clearError(input);
+    return true;
   }
-
-  let minDate, maxDate;
-
-  if (type === "padre") {
-    maxDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
-    minDate = new Date(today.getFullYear() - 90, today.getMonth(), today.getDate());
-  } else if (type === "estudiante") {
-    maxDate = new Date(today.getFullYear() - 4, today.getMonth(), today.getDate());
-    minDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
-  } else {
-    showError(input, "❌ Tipo desconocido");
-    return false;
-  }
-
-  if (val < minDate || val > maxDate) {
-    showError(
-      input,
-      `❌ La fecha debe estar entre ${minDate.toLocaleDateString()} y ${maxDate.toLocaleDateString()}`
-    );
-    return false;
-  }
-
-  clearError(input);
-  return true;
-}
 
   // Validación grupo
   function validateGroup(input) {
@@ -326,8 +326,8 @@ function validateBirthDate(input, type) {
   estColegio.addEventListener("input", () => validateAddress(estColegio));
   estGrupo.addEventListener("change", () => validateGroup(estGrupo));
   // Eventos de fecha
-padreFecha.addEventListener("blur", () => validateBirthDate(padreFecha, "padre"));
-estFecha.addEventListener("blur", () => validateBirthDate(estFecha, "estudiante"));
+  padreFecha.addEventListener("blur", () => validateBirthDate(padreFecha, "padre"));
+  estFecha.addEventListener("blur", () => validateBirthDate(estFecha, "estudiante"));
 
   // Validación final antes de enviar
   const form = document.querySelector("form");
