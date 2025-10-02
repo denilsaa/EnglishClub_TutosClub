@@ -4,29 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrar Estudiante Técnico</title>
-  <style>
-    body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#1E3A8A,#3B82F6);margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh;color:#000}
-    .form-container{background:#fff;border:1px solid #9CA3AF;border-radius:12px;box-shadow:0 4px 12px rgba(30,58,138,.3);padding:30px;max-width:680px;width:100%}
-    .form-container h2{text-align:center;color:#1E3A8A;margin-bottom:20px}
-    label{display:block;margin-bottom:6px;font-weight:bold;color:#4B5563}
-    input,select{width:97%;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #9CA3AF;font-size:14px}
-    input:focus,select:focus{border-color:#3B82F6;outline:none;box-shadow:0 0 4px #3B82F6}
-    .btn-submit{background:#10B981;color:#fff;font-weight:bold;border:none;padding:12px;width:100%;border-radius:8px;cursor:pointer;font-size:16px;transition:background-color .3s}
-    .btn-submit:hover{background:#059669}
-    .btn-cancel{background:#F59E0B;color:#fff;font-weight:bold;border:none;padding:12px;width:100%;border-radius:8px;cursor:pointer;font-size:16px;margin-top:10px;transition:background-color .3s}
-    .btn-cancel:hover{background:#D97706}
-    .subform{background:#F3F4F6;padding:15px;border-radius:10px;margin-top:10px;border:1px solid #9CA3AF}
-    .subform h3{color:#1E3A8A;font-size:16px;margin-bottom:10px}
-    .messages{margin:10px 0 20px}
-    .messages div{background:#FEF3C7;border:1px solid #F59E0B;color:#92400E;padding:8px 12px;border-radius:8px;margin-bottom:6px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media(max-width:600px){.grid-2{grid-template-columns:1fr}}
-  </style>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'usuarios/css/registro_tecnico.css' %}">
 </head>
 <body>
   <div class="form-container">
-    <h2>Registro de Estudiante Técnico</h2>
-
+    <h2 class="form-title">Registro de Estudiante Técnico</h2>
+    <p class="form-subtitle">Complete los datos requeridos para registrar al estudiante de forma rápida y segura.</p>
     {% if messages %}
       <div class="messages">
         {% for m in messages %}<div>{{ m }}</div>{% endfor %}
@@ -92,10 +76,14 @@
           </div>
         </div>
       </div>
-
-      <button type="submit" class="btn-submit">Registrar Estudiante</button>
-      <a href="{{ cancel_url }}"><button type="button" class="btn-cancel">Cancelar</button></a>
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Registrar Estudiante</button>
+        <button type="button" class="btn-cancel" onclick="window.location.href='{{ cancel_url }}'">Cancelar</button>
+      </div>
     </form>
   </div>
+  <!-- Fondo animado de partículas -->
+  <canvas id="particles"></canvas>
 </body>
+<script src="{% static 'usuarios/js/registro_regular.js' %}"></script>
 </html>

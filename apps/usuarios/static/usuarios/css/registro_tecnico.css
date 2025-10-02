@@ -30,28 +30,38 @@ body {
   width: 100%;
   max-width: 680px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 30px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #9CA3AF;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(30, 58, 138, .3);
   transition: all 0.8s ease;
   box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(40px);
 }
+
+.form-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Título y subtítulo */
 .form-title {
   text-align: center;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   background: linear-gradient(90deg, #1E3A8A, #3B82F6);
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   letter-spacing: 1px;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
   animation: fadeInDown 1s ease;
 }
 
@@ -67,7 +77,37 @@ body {
   animation-delay: 0.3s;
 }
 
-/* Inputs y selects */
+/* Subformularios */
+.subform {
+  background: #F9FAFB;
+  padding: 18px;
+  border-radius: 10px;
+  margin-top: 15px;
+  border: 1px solid #E5E7EB;
+  transition: transform 0.2s ease;
+}
+
+.subform:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
+}
+
+.subform h3 {
+  color: #1E3A8A;
+  font-size: 15px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Labels e Inputs */
+label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+}
+
 input, select {
   width: 100%;
   padding: 12px;
@@ -76,25 +116,24 @@ input, select {
   border-radius: 8px;
   border: 1px solid #D1D5DB;
   font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
 }
 
-/* Labels */
-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
+input:focus, select:focus {
+  border-color: #3B82F6;
+  outline: none;
+  box-shadow: 0 0 6px rgba(59,130,246,0.4);
 }
 
-/* Subform */
-.subform {
-  background: #F9FAFB;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 15px;
-  border: 1px solid #E5E7EB;
+/* Grid para inputs */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
+/* Botones */
 .form-actions {
   display: flex;
   gap: 12px;
@@ -119,13 +158,32 @@ label {
   background: #10B981;
   color: #fff;
 }
-.btn-submit:hover { background: #059669; }
+
+.btn-submit:hover { 
+  background: #059669; 
+  transform: translateY(-2px);
+}
 
 .btn-cancel {
   background: #F59E0B;
   color: #fff;
 }
-.btn-cancel:hover { background: #D97706; }
+
+.btn-cancel:hover { 
+  background: #D97706;
+  transform: translateY(-2px);
+}
+
+/* Mensajes */
+.messages div {
+  background: #FEF3C7;
+  border: 1px solid #F59E0B;
+  color: #92400E;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  animation: slideIn 0.6s ease forwards;
+}
 
 /* ===========================
    BREAKPOINTS RESPONSIVE
@@ -137,14 +195,13 @@ label {
     font-size: 13px;
     padding: 10px;
   }
-  h2 { font-size: 18px; }
+  .form-title { font-size: 18px; }
   .subform h3 { font-size: 14px; }
 }
 
 /* Celulares normales (361px - 600px) */
 @media (max-width: 600px) {
   .grid-2 {
-    display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
   }
@@ -153,18 +210,13 @@ label {
 
 /* Tablets verticales (601px - 768px) */
 @media (max-width: 768px) {
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
+  .grid-2 { grid-template-columns: 1fr; }
   .form-container { padding: 20px; }
 }
 
 /* Tablets horizontales y pantallas medianas (769px - 1024px) */
 @media (max-width: 1024px) {
-  .grid-2 {
-    grid-template-columns: 1fr 1fr; 
-  }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
   .form-actions { flex-direction: row; }
 }
 
@@ -193,4 +245,9 @@ label {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
