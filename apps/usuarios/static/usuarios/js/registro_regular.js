@@ -1,3 +1,6 @@
+/* ===========================
+            Animaciones
+   =========================== */
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".form-container");
   if (form) {
@@ -68,3 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.height = window.innerHeight;
   });
 });
+/* ===========================
+            Validaciones
+   =========================== */

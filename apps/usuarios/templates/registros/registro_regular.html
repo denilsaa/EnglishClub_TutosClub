@@ -9,8 +9,8 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>Registro de Estudiante Regular</h2>
-    <p class="form-subtitle">Complete los datos requeridos para registrar al estudiante.</p>
+    <h2 class="form-title">Registro de Estudiante Regular</h2>
+    <p class="form-subtitle">Complete los datos requeridos para registrar al estudiante de forma rápida y segura.</p>
 
     {% if messages %}
       <div class="messages">
@@ -119,8 +119,9 @@
       <!-- BOTONES -->
       <div class="form-actions">
         <button type="submit" class="btn-submit">Registrar Estudiante</button>
-        <a href="{{ cancel_url }}" class="btn-cancel">Cancelar</a>
+        <button type="button" class="btn-cancel" onclick="window.location.href='{{ cancel_url }}'">Cancelar</button>
       </div>
+
     </form>
   </div>
   <!-- Fondo animado de partículas -->
