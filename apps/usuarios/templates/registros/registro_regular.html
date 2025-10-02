@@ -10,35 +10,37 @@
 <body>
   <div class="form-container">
     <h2>Registro de Estudiante Regular</h2>
+    <p class="form-subtitle">Complete los datos requeridos para registrar al estudiante.</p>
 
     {% if messages %}
       <div class="messages">
-        {% for m in messages %}<div>{{ m }}</div>{% endfor %}
+        {% for m in messages %}
+          <div>{{ m }}</div>
+        {% endfor %}
       </div>
     {% endif %}
 
-    <!-- IMPORTANTE: namespace en el action -->
     <form method="POST" action="{% url 'usuarios:registrar_regular' %}">
       {% csrf_token %}
 
-      <!-- DATOS DEL PADRE (prefix: padre) -->
+      <!-- DATOS DEL PADRE -->
       <div class="subform">
-        <h3>Datos del Padre/Tutor</h3>
+        <h3>👨‍👩‍👧 Datos del Padre/Tutor</h3>
         <div class="grid-2">
           <div>
             <label for="padre-nombres">Nombres *</label>
-            <input type="text" id="padre-nombres" name="padre-nombres" required>
+            <input type="text" id="padre-nombres" name="padre-nombres" aria-label="Nombres del padre" required>
           </div>
           <div>
             <label for="padre-apellidos">Apellidos *</label>
-            <input type="text" id="padre-apellidos" name="padre-apellidos" required>
+            <input type="text" id="padre-apellidos" name="padre-apellidos" aria-label="Apellidos del padre" required>
           </div>
         </div>
 
         <div class="grid-2">
           <div>
             <label for="padre-ci">CI *</label>
-            <input type="text" id="padre-ci" name="padre-ci" required>
+            <input type="text" id="padre-ci" name="padre-ci" aria-label="CI del padre" required>
           </div>
           <div>
             <label for="padre-fecha_nacimiento">Fecha de Nacimiento *</label>
@@ -53,9 +55,9 @@
         <input type="text" id="padre-direccion" name="padre-direccion">
       </div>
 
-      <!-- CUENTA DEL PADRE (prefix: cuenta) -->
+      <!-- CUENTA -->
       <div class="subform">
-        <h3>Cuenta de Acceso (Padre/Tutor)</h3>
+        <h3>🔑 Cuenta de Acceso (Padre/Tutor)</h3>
         <label for="cuenta-nombre_usuario">Usuario *</label>
         <input type="text" id="cuenta-nombre_usuario" name="cuenta-nombre_usuario" required>
 
@@ -71,9 +73,9 @@
         </div>
       </div>
 
-      <!-- DATOS DEL ESTUDIANTE (prefix: est) -->
+      <!-- DATOS ESTUDIANTE -->
       <div class="subform">
-        <h3>Datos del Estudiante</h3>
+        <h3>🎓 Datos del Estudiante</h3>
         <div class="grid-2">
           <div>
             <label for="est-nombres">Nombres *</label>
@@ -114,10 +116,15 @@
         </select>
       </div>
 
-      <button type="submit" class="btn-submit">Registrar Estudiante</button>
-      <a href="{{ cancel_url }}"><button type="button" class="btn-cancel">Cancelar</button></a>
+      <!-- BOTONES -->
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Registrar Estudiante</button>
+        <a href="{{ cancel_url }}" class="btn-cancel">Cancelar</a>
+      </div>
     </form>
   </div>
+  <!-- Fondo animado de partículas -->
+  <canvas id="particles"></canvas>
 </body>
 <script src="{% static 'usuarios/js/registro_regular.js' %}"></script>
 </html>
